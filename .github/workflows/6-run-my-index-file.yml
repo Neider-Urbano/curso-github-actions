@@ -1,0 +1,18 @@
+name: Mi primer Workflow
+run-name: ¡Estoy aprendiendo GitHub Actions!
+on: [push]
+jobs:
+  fisrt-worflow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - name: Definir variable
+        run: echo "USERNAME=${{ github.actor }}" >> $GITHUB_ENV
+      - run: npm ci
+      - name: Correr script
+        run: npm run index.js
