@@ -13,6 +13,5 @@ jobs:
           node-version: 18
       - name: Definir variable
         run: echo "USERNAME=${{ github.actor }}" >> $GITHUB_ENV
-      - run: npm ci
       - name: Correr script
         run: npm run index.js
