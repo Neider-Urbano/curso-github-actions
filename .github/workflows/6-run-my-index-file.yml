@@ -14,4 +14,4 @@ jobs:
       - name: Definir variable
         run: echo "USERNAME=${{ github.actor }}" >> $GITHUB_ENV
       - name: Correr script
-        run: npm run index.js
+        run: node index.js
