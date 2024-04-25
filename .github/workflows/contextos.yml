@@ -34,10 +34,10 @@ jobs:
 
       - name: Set Dynamic Variable
         id: dynamic_var
-        run: echo "DYN_VAR=Dynamic Value Set in Step" >> $GITHUB_ENV
+        run: echo "DYN_VAR=Dynamic Value Set in Step" >> $GITHUB_OUTPUT
 
       - name: Use Output from Previous Step
-        run: echo "The dynamic variable is ${{ steps.dynamic_var.outputs.dyn_var }}"
+        run: echo "The dynamic variable is ${{ steps.dynamic_var.outputs.DYN_VAR }}"
 
       - name: Use Runner Context
         run: echo "Running on ${{ runner.os }} whit name ${{ runner.name}}"
