@@ -28,12 +28,12 @@ on:
       nombre:
         description: "Tu nombre es"
         required: true
-        default: Neider
+        default: "Neider"
         type: string
   schedule:
     - cron: "15 22 * * *"
 jobs:
-  hola-mundo-manual:
+  hola-mundo-manual-tigger:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -44,7 +44,7 @@ jobs:
         run: echo "LANGUAGE=${{ inputs.lenguaje_favorito }}" >> $GITHUB_ENV
       - name: Correr script
         run: node index.js
-  hola-mundo:
+  hola-mundo-tigger:
     if: ${{ github.event_name != 'workflow_dispatch' }}
     runs-on: ubuntu-latest
     steps:
