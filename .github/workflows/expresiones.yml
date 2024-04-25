@@ -9,6 +9,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Step for Feature Branches
+        if: startsWith(github.ref, 'refs/heads/aprendiendo-github-actions/')
+        run: echo "This step runs only on feature branches."
+
       - name: Set output
         id: vars
         run: echo "::set-output name=example::hello world"
@@ -16,3 +20,9 @@ jobs:
       - name: Use Output in Condition
         if: contains(steps.vars.outputs.example, 'world')
         run: echo "The output contains 'world'."
+
+      - name: Create Custom Message
+        run: echo "CUSTOM_MESSAGE=$(format('Build initiated by {0} on branch {1}', github.actor, github.ref_name))" >> $GITHUB_ENV
+
+      - name: Print Custom Message
+        run: echo $CUSTOM_MESSAGE
