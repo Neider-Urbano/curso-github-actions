@@ -12,15 +12,6 @@ on:
   issues:
     types:
       - labeled
-  issue_comment:
-    types: [created, deleted]
-  workflow_call:
-    inputs:
-      lenguage:
-        description: "Lenguaje de programación"
-        required: true
-        default: Javascript
-        type: string
   workflow_dispatch:
     inputs:
       nombre:
@@ -28,16 +19,22 @@ on:
         required: true
         default: Neider
         type: string
+      lenguage:
+        description: "Lenguaje de programación"
+        required: true
+        default: Javascript
+        type: string
   schedule:
     - cron: "15 22 * * *"
 jobs:
   hola-mundo-manual-tigger:
     runs-on: ubuntu-latest
+    if: ${{ inputs.nombre }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Definir nombre
-        run: echo "USERNAME=${{ github.event.inputs.nombre }}" >> $GITHUB_ENV
+        run: echo "USERNAME=${{ inputs.lenguage }}" >> $GITHUB_ENV
       - name: Correr script
         run: node index.js
       - name: Print the input name to STDOUT
