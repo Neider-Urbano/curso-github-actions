@@ -1,14 +1,22 @@
-name: Ejemplo Manual de Workflow
-
+name: Triggers
 on:
+  push:
+    branches:
+      - main
+      - aprendiendo-github-actions
+      - releases/**
   workflow_dispatch:
     inputs:
       nombre:
-        description: "Introduce tu nombre"
+        description: "Tu nombre es"
         required: true
-        default: "Neider"
+        default: Neider
         type: string
-
+      lenguage:
+        description: "Lenguaje de programación"
+        required: true
+        default: Javascript
+        type: string
 jobs:
   saludar:
     runs-on: ubuntu-latest
