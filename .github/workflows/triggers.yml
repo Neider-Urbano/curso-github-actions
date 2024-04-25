@@ -16,15 +16,6 @@ on:
     types: [created, deleted]
   workflow_dispatch:
     inputs:
-      lenguaje_favorito:
-        description: "Lenguaje favorito"
-        default: Javascript
-        required: true
-        type: choice
-        options:
-          - Python
-          - JavaScript
-          - Go
       nombre:
         description: "Tu nombre es"
         required: true
@@ -39,9 +30,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Definir nombre
-        run: echo "USERNAME=${{ inputs.nombre.default }}" >> $GITHUB_ENV
-      - name: Definir lenguaje
-        run: echo "LANGUAGE=${{ inputs.lenguaje_favorito }}" >> $GITHUB_ENV
+        run: echo "USERNAME=${{ github.event.inputs.nombre }}" >> $GITHUB_ENV
       - name: Correr script
         run: node index.js
   hola-mundo-tigger:
