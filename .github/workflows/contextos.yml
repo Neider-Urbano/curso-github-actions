@@ -1,6 +1,9 @@
 name: Ejemplo de Contextos en GitHub Actions
 
 on:
+  push:
+    branches:
+      - aprendiendo-github-actions
   workflow_dispatch:
     inputs:
       example_input:
