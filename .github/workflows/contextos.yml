@@ -1,0 +1,49 @@
+name: Ejemplo de Contextos en GitHub Actions
+
+on:
+  workflow_dispatch:
+    inputs:
+      example_input:
+        description: "Un ejemplo de input"
+        required: true
+        default: "Hello, World!"
+
+env:
+  GLOBAL_ENV: "Este es un ejemplo de variable de entorno global"
+
+jobs:
+  explore-contexts:
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Print GitHub Context
+        run: echo "The event type is ${{ github.event_name }} and repository is ${{ github.repository }}"
+
+      - name: Use ENV Context
+        run: echo "Global environment variable is $GLOBAL_ENV"
+
+      - name: Use Input
+        run: echo "Input provided = ${{ github.event.inputs.example_input }}"
+
+      - name: Set Dynamic Variable
+        id: dynamic_var
+        run: echo "::set-output name=dyn_var::Dynamic Value Set in Step"
+
+      - name: Use Output from Previous Step
+        run: echo "The dynamic variable is ${{ steps.dynamic_var.outputs.dyn_var }}"
+
+      - name: Use Runner Context
+        run: echo "Running on ${{ runner.os }} with label ${{ runner.label }}"
+
+      - name: Use Secret
+        env:
+          SECRET_TOKEN: ${{ secrets.SECRET_TOKEN }}
+        run: echo "Using secret = $SECRET_TOKEN"
+
+      - name: Print Job Status
+        if: success()
+        run: echo "The job status is successful"

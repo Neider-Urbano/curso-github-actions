@@ -1,8 +1,8 @@
-name: Contexto
-run-name: ¡Estoy aprendiendo a usar Contextos!
+name: Contexto GitHub
+run-name: ¡Estoy aprendiendo a usar el Contexto GitHub!
 on: push
 jobs:
-  check-main:
+  check-github:
     if: ${{ github.ref == 'refs/heads/aprendiendo-github-actions' }}
     runs-on: ubuntu-latest
     steps:
