@@ -5,27 +5,41 @@ on:
       - main
       - aprendiendo-github-actions
       - releases/**
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - "**.js"
+  issues:
+    types:
+      - labeled
+  issue_comment:
+    types: [created, deleted]
   workflow_dispatch:
     inputs:
       nombre:
         description: "Tu nombre es"
         required: true
-        default: Neider
+        default: "Neider"
         type: string
-      lenguage:
-        description: "Lenguaje de programación"
-        required: true
-        default: Javascript
-        type: string
+  schedule:
+    - cron: "15 22 * * *"
 jobs:
-  saludar:
+  hola-mundo-manual-tigger:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Definir Nombre
-        run: echo "NOMBRE=${{ github.event.inputs.nombre }}" >> $GITHUB_ENV
-
-      - name: Imprimir Saludo
-        run: echo "Hola, $NOMBRE, bienvenido al ejemplo de workflow_dispatch."
+      - name: Definir nombre
+        run: echo "USERNAME=${{ github.event.inputs.nombre }}" >> $GITHUB_ENV
+      - name: Correr script
+        run: node index.js
+  hola-mundo-tigger:
+    if: ${{ github.event_name != 'workflow_dispatch' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Definir variable
+        run: echo "USERNAME=${{ github.actor }}" >> $GITHUB_ENV
+      - name: Correr script
+        run: node index.js
