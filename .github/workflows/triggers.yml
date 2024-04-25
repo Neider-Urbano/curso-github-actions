@@ -30,16 +30,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Definir nombre
-        run: echo "USERNAME=${{ github.event.inputs.nombre.default }}" >> $GITHUB_ENV
-      - name: Correr script
-        run: node index.js
-  hola-mundo-tigger:
-    if: ${{ github.event_name != 'workflow_dispatch' }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Definir variable
-        run: echo "USERNAME=${{ github.actor }}" >> $GITHUB_ENV
+        run: echo "USERNAME=${{ github.event.inputs.nombre }}" >> $GITHUB_ENV
       - name: Correr script
         run: node index.js
