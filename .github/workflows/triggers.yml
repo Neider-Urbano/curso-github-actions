@@ -14,12 +14,19 @@ on:
       - labeled
   issue_comment:
     types: [created, deleted]
+  workflow_call:
+    inputs:
+      lenguage:
+        description: "Lenguaje de programación"
+        required: true
+        default: Javascript
+        type: string
   workflow_dispatch:
     inputs:
       nombre:
         description: "Tu nombre es"
         required: true
-        default: "Neider"
+        default: Neider
         type: string
   schedule:
     - cron: "15 22 * * *"
@@ -31,5 +38,17 @@ jobs:
         uses: actions/checkout@v4
       - name: Definir nombre
         run: echo "USERNAME=${{ github.event.inputs.nombre }}" >> $GITHUB_ENV
+      - name: Correr script
+        run: node index.js
+      - name: Print the input name to STDOUT
+        run: echo The username is ${{ inputs.lenguage }}
+  hola-mundo-tigger:
+    if: ${{ github.event_name != 'workflow_dispatch' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Definir variable
+        run: echo "USERNAME=${{ github.actor }}" >> $GITHUB_ENV
       - name: Correr script
         run: node index.js
