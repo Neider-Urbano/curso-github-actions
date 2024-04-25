@@ -34,19 +34,22 @@ jobs:
 
       - name: Set Dynamic Variable
         id: dynamic_var
-        run: echo "::set-output name=dyn_var::Dynamic Value Set in Step"
+        run: echo "DYN_VAR=Dynamic Value Set in Step" >> $GITHUB_ENV
 
       - name: Use Output from Previous Step
         run: echo "The dynamic variable is ${{ steps.dynamic_var.outputs.dyn_var }}"
 
       - name: Use Runner Context
-        run: echo "Running on ${{ runner.os }} with label ${{ runner.label }}"
+        run: echo "Running on ${{ runner.os }} whit name ${{ runner.name}}"
 
       - name: Use Secret
         env:
-          SECRET_TOKEN: ${{ secrets.SECRET_TOKEN }}
+          SECRET_TOKEN: password
         run: echo "Using secret = $SECRET_TOKEN"
 
       - name: Print Job Status
         if: success()
         run: echo "The job status is successful"
+
+      - name: Print Job Status value
+        run: echo "${{ job.status}}"
