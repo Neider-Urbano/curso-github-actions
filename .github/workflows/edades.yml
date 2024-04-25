@@ -13,7 +13,7 @@ on:
         type: string
   push:
     branches:
-        - **
+      - aprendiendo-github-actions
 jobs:
   mayor:
     if: ${{ inputs.edad >= 18 }}
