@@ -13,4 +13,4 @@ jobs:
         env:
           NOMBRE: Juan
       - name: My variable
-        run: echo "Mi variable tiene un valor de $MY_VARIABLE"
+        run: echo "Mi variable tiene un valor de MY_VARIABLE"
