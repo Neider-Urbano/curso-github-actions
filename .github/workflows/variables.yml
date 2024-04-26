@@ -13,6 +13,8 @@ jobs:
         env:
           NOMBRE: Juan
       - name: My variable
-        run: echo "Mi variable MY_VARIABLE tiene un valor de $MY_VARIABLE"
+        run: echo "Mi variable MY_VARIABLE tiene un valor de ${{ vars.MY_VARIABLE }}"
+      - name: My secret
+        run: echo "Mi variable MY_SECRET tiene un valor de ${{ secrets.MY_SECRET }}"
       - name: Debug Environment Variables
         run: printenv | sort
