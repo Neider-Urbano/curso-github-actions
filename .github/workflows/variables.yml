@@ -13,4 +13,6 @@ jobs:
         env:
           NOMBRE: Juan
       - name: My variable
-        run: echo "Mi variable tiene un valor de MY_VARIABLE"
+        run: echo "Mi variable MY_VARIABLE tiene un valor de $MY_VARIABLE"
+      - name: Debug Environment Variables
+        run: printenv | sort
